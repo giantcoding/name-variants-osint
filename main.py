@@ -113,13 +113,13 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
     _add('full', full)
     _add('compact', full.replace(' ', ''))
 
-    # 2) Single tokens (nombre(s) y apellido)
+    # 2) (nombre(s) y apellido)
     for t in nombres:
         _add('given', t)
     for t in apellidos:
         _add('family', t)
 
-    # 3) Iniciales
+    # 3) Inicialess
     initials = ''.join(_initial(t) for t in nombres + apellidos)
     if initials:
         _add('initials_concat', initials)
@@ -155,28 +155,28 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
         _add('email_local_2', _initial(first) + last)
         _add('email_local_3', first + _initial(last))
 
-    # 7) variations with middle initials (if any)
+    # 7) variaciones con iniciales intermedias (si las hubiese)
     if len(nombres) > 1:
         mid_initials = ''.join(_initial(n) for n in nombres[1:])
         _add('given_middle_initials', first + ''.join(n for n in nomes_to_str(nombres[1:])))
         # also first+midinitial+last
         _add('fm_initials_l', first + ''.join(_initial(n) for n in nombres[1:]) + last)
 
-    # 8) surname only with common prefixes
+    # 8) apellido solo con prefijos comunes
     if last:
         _add('surname_dot', last + '.')
         _add('surname_with_initial', last + _initial(first))
 
-    # 9) single-letter dot forms
+    # 9) Formas con punto en una sola palabra
     if nombres and apellidos:
         _add('initial_dot_surname', _initial(first) + '.' + last)
         _add('initial_underscore_surname', _initial(first) + '_' + last)
 
-    # 10) fallback: tokens individually and capitalized
+    # 10) reserva tokens individualmente y en mayúsculas
     for t in tokens:
         _add('token', t)
 
-    # Build combined "all" list
+    # Crear una lista combinada de "todos los nombres"
     all_list = produced.copy()
     if max_items is not None:
         all_list = all_list[:max_items]
@@ -184,7 +184,7 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
     return {'groups': groups, 'all': all_list}
 
 
-# Utilities used above (kept at bottom)
+# Utilidades utilizadas arriba
 
 def nomes_to_str(lst: List[str]) -> List[str]:
     """Aux: convierto lista a lista de strings (defensa de tipo)."""
@@ -232,3 +232,4 @@ def _cli():
 
 if __name__ == '__main__':
     _cli()
+
