@@ -224,7 +224,7 @@ def _cli():
         # formato simple legible
         for nm, v in out.items():
             print(f'Nombre: {nm}')
-            print('Variantes (all):')
+            print('Variantes (todos):')
             for x in v['all']:
                 print('  -', x)
             print()  
@@ -232,4 +232,5 @@ def _cli():
 
 if __name__ == '__main__':
     _cli()
+
 
