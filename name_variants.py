@@ -81,7 +81,7 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
     if not tokens:
         return {'groups': {}, 'all': []}
 
-    # heurística: asumimos último token = apellido principal
+    # asumimos último token = apellido principal
     if len(tokens) == 1:
         nombres = [tokens[0]]
         apellidos = []
@@ -128,7 +128,7 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
     if apellidos:
         _add('family_initial', _initial(last))
 
-    # 4) initial + surname and surname + initial with separators
+    # 4) inicial + apellido y apellido + inicial con separadores
     for sep in SEPARATORS:
         if nombres and apellidos:
             left = _initial(first) + sep + last
@@ -139,7 +139,7 @@ def generate_variants(name: str, max_items: Optional[int] = None, options: Optio
         if nombres:
             _add('given_sep_initial', first + sep + _initial(first))
 
-    # 5) dot/underscore/hyphen combos between given and family
+    # 5) Combinaciones de punto/guión bajo/guión entre dado y familia
     for sep in SEPARATORS:
         if nombres and apellidos:
             _add('given_sep_family', first + sep + last)
@@ -232,5 +232,6 @@ def _cli():
 
 if __name__ == '__main__':
     _cli()
+
 
 
