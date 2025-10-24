@@ -18,7 +18,7 @@ Produce iniciales, combinaciones, formatos tipo usuario/email-local y otras vari
 ## Instalación
 Clona el repositorio y ejecuta directamente el script:
 ```bash
-git clone https://github.com/<tu_usuario>/name-variants.git
+git clone https://github.com/giantcoding/name-variants.git
 cd name-variants
 ```
 
